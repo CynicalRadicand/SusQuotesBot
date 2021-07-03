@@ -22,9 +22,9 @@ client.on('ready', () => {
             console.log(` - ${channel.name} ${channel.type} ${channel.id}`)
             
             // sends hello message in all general chats
-            /*if (channel.name == "general") {
-                channel.send("Ni Howdy", { files: ["C:/Users/farsa/Pictures/Phoenix-NO-U.gif"] })
-            }*/
+            if (channel.name == "general" || channel.name == "bot-testing") {
+                channel.send("Who be Sussin?")
+            }
 
             
         })
