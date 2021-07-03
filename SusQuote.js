@@ -16,7 +16,7 @@ client.on('ready', () => {
 
     // logs the servers the bot is connected to
     client.guilds.cache.forEach((guild) => {
-        guild.member(client.user).setNickname("Sus Bot");
+        guild.member(client.user).setNickname("Sussy Baka Bot");
         console.log(guild.name);
         // logs all channel names, types, ids
         guild.channels.cache.forEach((channel) => {
@@ -42,7 +42,7 @@ client.on('message', (receivedMessage) => {
     // Check if the bot's user was tagged in the message
     if (receivedMessage.mentions.has(client.user)) {
         // reset nickname
-        receivedMessage.guild.member(client.user).setNickname("Sus Bot")
+        receivedMessage.guild.member(client.user).setNickname("Sussy Baka Bot")
 
         // Send acknowledgement message
         receivedMessage.channel.send("No U")
