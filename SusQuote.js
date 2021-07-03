@@ -41,30 +41,31 @@ client.on('message', (receivedMessage) => {
     // make string array
     var msgArray = receivedMessage.content.toLowerCase().split(" ")
 
-    // add quotes to random word
-    var randNum = Math.floor(Math.random()*msgArray.length);
-    var randWord = msgArray[randNum];
-    msgArray[randNum] = `\"${randWord}\"`;
+    //array for words that do not have quotation marks around them
+    var wordsToQuote = [];
 
-    //send
-    receivedMessage.channel.send(msgArray.join(' '))
+    // new array is made of words in the original sentence that does not contain quotation marks
+    for (var i = 0; i < msgArray.length; i++) {
+        //!msgArray[i].includes("\"") && !msgArray[i].includes("\'")
+        var firstChar = msgArray[i].charAt(0);
+        if (firstChar != "\"" && firstChar != "\'") {
+            wordsToQuote.push(msgArray[i]);
+        }
+    }
 
+    if (wordsToQuote.length == 0) {
+        receivedMessage.channel.send("damn u sus");
+    } else {
+        // add quotes to random word for
+        var randNum = Math.floor(Math.random()*wordsToQuote.length);
+        var randWord = wordsToQuote[randNum];
 
-    /*if (msgFormat.includes("i'm") || receivedMessage.content.toLowerCase().includes("i am ") || msgFormat.includes("im")) {
-        
-        // format message to remove im
-        var you = receivedMessage.content.toLowerCase()
-        you = you.split("im ").pop()
-        you = you.split("i'm ").pop()
-        you = you.split("i am ").pop()
-        
-        // responds in  channel
-        receivedMessage.channel.send("Hello " + you + ", I'm Cynical's Bot! 🙃")
-        // reacts with emote
-        receivedMessage.react("😑")
-    } */
-    
+        var pos = msgArray.indexOf(randWord);
+        msgArray[pos] = `\"${randWord}\"`;
 
+        //send
+        receivedMessage.channel.send(msgArray.join(' '))
+    }
 
     // Check if the bot's user was tagged in the message
     if (receivedMessage.mentions.has(client.user)) {
