@@ -39,7 +39,7 @@ client.on('message', (receivedMessage) => {
     }
 
     // make string array
-    var msgArray = receivedMessage.content.toLowerCase().split(" ")
+    var msgArray = receivedMessage.content.split(" ")
 
     // add quotes to random word
     var randNum = Math.floor(Math.random()*msgArray.length);
@@ -54,7 +54,7 @@ client.on('message', (receivedMessage) => {
     //send
     receivedMessage.channel.send(sendString);
     // delete original
-    receivedMessage.delete();
+    //receivedMessage.delete();
 
 
     /*if (msgFormat.includes("i'm") || receivedMessage.content.toLowerCase().includes("i am ") || msgFormat.includes("im")) {
