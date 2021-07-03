@@ -38,9 +38,19 @@ client.on('message', (receivedMessage) => {
         return
     }
 
-    // check if message has I'm
-    var msgFormat = receivedMessage.content.toLowerCase().split(" ")
-    if (msgFormat.includes("i'm") || receivedMessage.content.toLowerCase().includes("i am ") || msgFormat.includes("im")) {
+    // make string array
+    var msgArray = receivedMessage.content.toLowerCase().split(" ")
+
+    // add quotes to random word
+    var randNum = Math.floor(Math.random()*msgArray.length);
+    var randWord = msgArray[randNum];
+    msgArray[randNum] = `\"${randWord}\"`;
+
+    //send
+    receivedMessage.channel.send(msgArray.join(' '))
+
+
+    /*if (msgFormat.includes("i'm") || receivedMessage.content.toLowerCase().includes("i am ") || msgFormat.includes("im")) {
         
         // format message to remove im
         var you = receivedMessage.content.toLowerCase()
@@ -52,7 +62,8 @@ client.on('message', (receivedMessage) => {
         receivedMessage.channel.send("Hello " + you + ", I'm Cynical's Bot! 🙃")
         // reacts with emote
         receivedMessage.react("😑")
-    }
+    } */
+    
 
 
     // Check if the bot's user was tagged in the message
