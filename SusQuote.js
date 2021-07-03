@@ -46,8 +46,12 @@ client.on('message', (receivedMessage) => {
     var randWord = msgArray[randNum];
     msgArray[randNum] = `\"${randWord}\"`;
 
+    var sendString = `${receivedMessage.author}: ${msgArray.join(' ')}`;
+
     //send
-    receivedMessage.channel.send(msgArray.join(' '))
+    receivedMessage.channel.send(sendString);
+
+    receivedMessage.delete();
 
 
     /*if (msgFormat.includes("i'm") || receivedMessage.content.toLowerCase().includes("i am ") || msgFormat.includes("im")) {
