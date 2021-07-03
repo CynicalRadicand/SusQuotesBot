@@ -8,7 +8,7 @@ client.on('ready', () => {
     console.log("Connected as: " + client.user.tag)
 
     // sets the status of the bot
-    client.user.setActivity("You Sleep" , { type: "WATCHING" })
+    client.user.setActivity("You Sleep", { type: "WATCHING" })
 
 
     // send to specific channel
@@ -16,17 +16,18 @@ client.on('ready', () => {
 
     // logs the servers the bot is connected to
     client.guilds.cache.forEach((guild) => {
-        console.log(guild.name)
+        guild.member(client.user).setNickname("Sus Bot");
+        console.log(guild.name);
         // logs all channel names, types, ids
         guild.channels.cache.forEach((channel) => {
-            console.log(` - ${channel.name} ${channel.type} ${channel.id}`)
-            
+            console.log(` - ${channel.name} ${channel.type} ${channel.id}`);
+
             // sends hello message in all general chats
             if (channel.name == "general" || channel.name == "bot-testing") {
-                channel.send("Who be Sussin?")
+                channel.send("Who be Sussin?");
             }
 
-            
+
         })
     });
 })
@@ -38,53 +39,55 @@ client.on('message', (receivedMessage) => {
         return
     }
 
-    // make string array
-    var msgArray = receivedMessage.content.split(" ")
-
-    //array for words that do not have quotation marks around them
-    var wordsToQuote = [];
-
-
-    // new array is made of words in the original sentence that does not contain quotation marks
-    for (var i = 0; i < msgArray.length; i++) {
-        //!msgArray[i].includes("\"") && !msgArray[i].includes("\'")
-        var firstChar = msgArray[i].charAt(0);
-        if (firstChar != "\"" && firstChar != "\'") {
-            wordsToQuote.push(msgArray[i]);
-        }
-    }
-
-    var sendString = `${msgArray.join(' ')}`;
-
-    // change nickname
-    receivedMessage.guild.member(client.user).setNickname(receivedMessage.member.user.username);
-
-    // delete original
-    //receivedMessage.delete();
-
-
-    if (wordsToQuote.length == 0) {
-        receivedMessage.channel.send("damn u sus");
-    } else {
-        // add quotes to random word for
-        var randNum = Math.floor(Math.random()*wordsToQuote.length);
-        var randWord = wordsToQuote[randNum];
-
-        var pos = msgArray.indexOf(randWord);
-        msgArray[pos] = `\"${randWord}\"`;
-
-        //send
-        receivedMessage.channel.send(msgArray.join(' '))
-    }
-
     // Check if the bot's user was tagged in the message
     if (receivedMessage.mentions.has(client.user)) {
         // reset nickname
         receivedMessage.guild.member(client.user).setNickname("Sus Bot")
-        
+
         // Send acknowledgement message
         receivedMessage.channel.send("No U")
     }
+    else {
+        // make string array
+        var msgArray = receivedMessage.content.split(" ")
+
+        //array for words that do not have quotation marks around them
+        var wordsToQuote = [];
+
+
+        // new array is made of words in the original sentence that does not contain quotation marks
+        for (var i = 0; i < msgArray.length; i++) {
+            //!msgArray[i].includes("\"") && !msgArray[i].includes("\'")
+            var firstChar = msgArray[i].charAt(0);
+            if (firstChar != "\"" && firstChar != "\'") {
+                wordsToQuote.push(msgArray[i]);
+            }
+        }
+
+        var sendString = `${msgArray.join(' ')}`;
+
+        // change nickname
+        receivedMessage.guild.member(client.user).setNickname(receivedMessage.member.user.username);
+
+        // delete original
+        //receivedMessage.delete();
+
+
+        if (wordsToQuote.length == 0) {
+            receivedMessage.channel.send("Maximum Sus Achieved");
+        } else {
+            // add quotes to random word for
+            var randNum = Math.floor(Math.random() * wordsToQuote.length);
+            var randWord = wordsToQuote[randNum];
+
+            var pos = msgArray.indexOf(randWord);
+            msgArray[pos] = `\"${randWord}\"`;
+
+            //send
+            receivedMessage.channel.send(msgArray.join(' '))
+        }
+    }
+
 })
 
 // logs the bot in with the token
