@@ -46,11 +46,14 @@ client.on('message', (receivedMessage) => {
     var randWord = msgArray[randNum];
     msgArray[randNum] = `\"${randWord}\"`;
 
-    var sendString = `${receivedMessage.author}: ${msgArray.join(' ')}`;
+    var sendString = `${msgArray.join(' ')}`;
+
+    // change nickname
+    receivedMessage.guild.member(client.user).setNickname(receivedMessage.member.user.username)
 
     //send
     receivedMessage.channel.send(sendString);
-
+    // delete original
     receivedMessage.delete();
 
 
