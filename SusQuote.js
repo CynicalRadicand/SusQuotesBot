@@ -22,9 +22,9 @@ client.on('ready', () => {
             console.log(` - ${channel.name} ${channel.type} ${channel.id}`)
             
             // sends hello message in all general chats
-            /*if (channel.name == "general") {
-                channel.send("Ni Howdy", { files: ["C:/Users/farsa/Pictures/Phoenix-NO-U.gif"] })
-            }*/
+            if (channel.name == "general" || channel.name == "bot-testing") {
+                channel.send("Who be Sussin?")
+            }
 
             
         })
@@ -39,10 +39,11 @@ client.on('message', (receivedMessage) => {
     }
 
     // make string array
-    var msgArray = receivedMessage.content.toLowerCase().split(" ")
+    var msgArray = receivedMessage.content.split(" ")
 
     //array for words that do not have quotation marks around them
     var wordsToQuote = [];
+
 
     // new array is made of words in the original sentence that does not contain quotation marks
     for (var i = 0; i < msgArray.length; i++) {
@@ -52,6 +53,15 @@ client.on('message', (receivedMessage) => {
             wordsToQuote.push(msgArray[i]);
         }
     }
+
+    var sendString = `${msgArray.join(' ')}`;
+
+    // change nickname
+    receivedMessage.guild.member(client.user).setNickname(receivedMessage.member.user.username)
+
+    // delete original
+    //receivedMessage.delete();
+
 
     if (wordsToQuote.length == 0) {
         receivedMessage.channel.send("damn u sus");
