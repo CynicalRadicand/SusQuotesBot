@@ -49,7 +49,7 @@ client.on('message', (receivedMessage) => {
     var sendString = `${msgArray.join(' ')}`;
 
     // change nickname
-    receivedMessage.guild.member(client.user).setNickname(receivedMessage.member.user.username)
+    receivedMessage.guild.member(client.user).setNickname(receivedMessage.member.user.username);
 
     //send
     receivedMessage.channel.send(sendString);
@@ -75,6 +75,9 @@ client.on('message', (receivedMessage) => {
 
     // Check if the bot's user was tagged in the message
     if (receivedMessage.mentions.has(client.user)) {
+        // reset nickname
+        receivedMessage.guild.member(client.user).setNickname("Sus Bot")
+        
         // Send acknowledgement message
         receivedMessage.channel.send("No U")
     }
