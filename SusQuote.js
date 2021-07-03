@@ -58,9 +58,13 @@ client.on('message', (receivedMessage) => {
         // new array is made of words in the original sentence that does not contain quotation marks
         for (var i = 0; i < msgArray.length; i++) {
             //!msgArray[i].includes("\"") && !msgArray[i].includes("\'")
-            var firstChar = msgArray[i].charAt(0);
+            var word = msgArray[i];
+            var firstChar = word.charAt(0);
+            var lastChar = word.charAt(word.length-1)
             if (firstChar != "\"" && firstChar != "\'") {
-                wordsToQuote.push(msgArray[i]);
+                if (lastChar != "\"" && lastChar != "\'") {
+                    wordsToQuote.push(msgArray[i]);
+                }
             }
         }
 
