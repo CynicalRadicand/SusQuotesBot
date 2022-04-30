@@ -2,6 +2,8 @@ const Discord = require('discord.js')
 const { receiveMessageOnPort } = require('worker_threads')
 const client = new Discord.Client()
 
+// Sussy
+
 // Does things on ready
 client.on('ready', () => {
     // Connected as bot name
